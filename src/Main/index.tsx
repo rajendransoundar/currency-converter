@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import CurDropdown from "../Components/Dropdown"
-import "./style.css"
+import CurDropdown from "../Components/Dropdown";
+import "./style.css";
+import {Swap} from "../assets/index"
 
 export default function Index() {
   const [amount, setAmount] = useState("");
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
-  const [curOut, setCurOut] = useState("")
+  const [response, setResponse] = useState(null)
 
   const myHeaders = new Headers();
   myHeaders.append("apikey", "T6efhkEzieT0fGnoC3aHMczY82kHb0ms");
@@ -24,81 +25,72 @@ export default function Index() {
         requestOptions
       );
       const result = await response.json();
-      setCurOut(result.result)
-      console.log(result);
+      setResponse(result);
+      console.log(result);  
     } catch (error) {
-      console.log('error', error);
+      console.log("error", error);
     }
   }
-  const handleSwap=()=>{
-    const temp=from;
+  const handleSwap = () => {
+    const temp = from;
     setFrom(to);
-    setTo(from)
-  }
+    setTo(from);
+  };
   return (
     <>
-<div className="cur-cnvtr-container">
-<form className="" onSubmit={handleSubmit}>
-  <div className="cur-form">
-<div className="input-col">
-  <p>Amount</p>
-  <input
-              type="text"
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-            />
-</div>
-<div className="input-col">
-  <p>From</p>
-  <CurDropdown onChange={(e) => setFrom(e.target.value)}/>
-</div>
-<div className="input-col">
-  <p>To</p>
-  <CurDropdown onChange={(e) => setTo(e.target.value)}/>
-</div>
-<div className="input-col">
-  <p></p>
-  <div className="swap-btn" onClick={handleSwap}>swap</div>
-</div>
-</div>
-<button type="submit">Submit</button>
-  </form>
-</div>
-{amount} {from} = {curOut} {to}
-      {/* <div className="man-container">
-        <h1>Currency Converter</h1>
-        <form className="cur-form" onSubmit={handleSubmit}>
-          <label>
-            Amount:
-            <input
-              type="text"
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-            />
-          </label>
-          <br />
-          <label>
-            From:
-            <input
-              type="text"
-              value={from}
-              onChange={(e) => setFrom(e.target.value)}
-            />
-          </label>
-          <br />
-          <label>
-            To:
-            <input
-              type="text"
-              value={to}
-              // onChange={(e) => setTo(e.target.value)}
-            />
-          </label>
-          <br />
-          <CurDropdown onChange={(e) => setTo(e.target.value)}/>
-          <button type="submit">Submit</button>
+    
+      <div className="container">
+      <div className="header">
+      <h1>Raa Currency Converter</h1>
+    </div>
+        {/* <h1>Currency Converter</h1> */}
+        <form className="" onSubmit={handleSubmit}>
+          <div className="cur-form">
+            <div className="input-col">
+              <p>Amount</p>
+              <input
+                type="text  "
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+              />
+            </div>
+            <div className="input-col">
+              <p>From</p>
+              <CurDropdown value={from} onChange={(e) => setFrom(e.target.value)} />
+            </div>
+            <div className="input-col">
+              <p></p>
+              <div className="swap-btn" onClick={handleSwap}>
+              <Swap/>
+              </div>
+            </div>
+            <div className="input-col">
+              <p>To</p>
+              <CurDropdown value={to} onChange={(e) => setTo(e.target.value)} />
+            </div>
+          </div>
+          <div className="input-col">
+          <button className="sub-btn" type="submit">
+            Submit
+          </button>
+          </div>
         </form>
-      </div> */}
+        <div className="rslt-cntnr">
+        {response?(
+         <>
+
+         {amount} {from} = {response.result} {to}
+       rate {response.info.rate}
+       </>
+         ):("jkjk")
+        }
+        </div>
+       
+      </div>
+      <div className="footer">
+        Designed & Developed by @Raa
+      </div>
     </>
   );
 }
+      

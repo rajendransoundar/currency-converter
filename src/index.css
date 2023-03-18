@@ -5,6 +5,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100vh;
+  background-image: url("./assets/bgimag.jpg");
+  background-size: cover;
 
 }
 
@@ -12,6 +15,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-:root{
-  height: 100vh;
+
+input, select, button{
+  font-family: inherit;
 }
