@@ -78,7 +78,7 @@ export default function Index() {
           </div>
         </form>
         <div className="rslt-cntnr">
-          {response.success ? (
+          {response?.success && (
             <>
               <p>
                 {amount} {from} = {response.result} {to}
@@ -87,14 +87,15 @@ export default function Index() {
                 Rate: 1 {from} = {response.info.rate} {to}
               </p>
             </>
-          ) : response.message ? (
-            <p>You have exceeded your daily/monthly API rate limit.</p>
-          ) : (
-            <p>Converted Values will displayed here.</p>
           )}
+          {response?.message && (
+            <p>You have exceeded your daily/monthly API rate limit.</p>
+          )}
+          {!response && <p>Converted Values will displayed here.</p>}
         </div>
         <div className="footer">
-       <p> Designed & Developed by @Raa</p></div>
+          <p> Designed & Developed by @Raa</p>
+        </div>
       </div>
       {/* <div className="footer">
         <br />
