@@ -41,7 +41,7 @@ export default function Index() {
     
       <div className="container">
       <div className="header">
-      <h1>Raa Currency Converter</h1>
+      <h1>Currency Converter</h1>
     </div>
         {/* <h1>Currency Converter</h1> */}
         <form className="" onSubmit={handleSubmit}>
@@ -79,10 +79,10 @@ export default function Index() {
         {response?(
          <>
 
-         {amount} {from} = {response.result} {to}
-       rate {response.info.rate}
+        <p> {amount} {from} = {response.result} {to}</p>
+     <p>  Rate: 1 {from} = {response.info.rate} {to}</p>
        </>
-         ):("jkjk")
+         ):("Converted Values Here")
         }
         </div>
        
@@ -93,4 +93,99 @@ export default function Index() {
     </>
   );
 }
+
+// import React, { useState, useEffect } from "react";
+// import CurDropdown from "../Components/Dropdown";
+// import "./style.css";
+// import { Swap } from "../assets/index";
+
+// export default function Index() {
+//   const [amount, setAmount] = useState("");
+//   const [from, setFrom] = useState("");
+//   const [to, setTo] = useState("");
+//   const [response, setResponse] = useState(null);
+
+//   const myHeaders = new Headers();
+//   myHeaders.append("apikey", "T6efhkEzieT0fGnoC3aHMczY82kHb0ms");
+//   const requestOptions: RequestInit = {
+//     method: "GET",
+//     redirect: "follow",
+//     headers: myHeaders,
+//   };
+
+//   useEffect(() => {
+//     async function fetchData() {
+//       try {
+//         const response = await fetch(
+//           `https://api.apilayer.com/fixer/convert?to=${to}&from=${from}&amount=${amount}`,
+//           requestOptions
+//         );
+//         const result = await response.json();
+//         setResponse(result);
+//         console.log(result);
+//       } catch (error) {
+//         console.log("error", error);
+//       }
+//     }
+//     fetchData();
+//   }, [amount, from, to, requestOptions]);
+
+//   const handleSwap = () => {
+//     const temp = from;
+//     setFrom(to);
+//     setTo(temp);
+//   };
+
+//   return (
+//     <>
+//       <div className="container">
+//         <div className="header">
+//           <h1>Currency Converter</h1>
+//         </div>
+//         <form className="">
+//           <div className="cur-form">
+//             <div className="input-col">
+//               <p>Amount</p>
+//               <input
+//                 type="text"
+//                 value={amount}
+//                 onChange={(e) => setAmount(e.target.value)}
+//               />
+//             </div>
+//             <div className="input-col">
+//               <p>From</p>
+//               <CurDropdown value={from} onChange={(e) => setFrom(e.target.value)} />
+//             </div>
+//             <div className="input-col">
+//               <p></p>
+//               <div className="swap-btn" onClick={handleSwap}>
+//                 <Swap />
+//               </div>
+//             </div>
+//             <div className="input-col">
+//               <p>To</p>
+//               <CurDropdown value={to} onChange={(e) => setTo(e.target.value)} />
+//             </div>
+//           </div>
+//         </form>
+//         <div className="rslt-cntnr">
+//           {response ? (
+//             <>
+//               <p>
+//                 {amount} {from} = {response.result} {to}
+//               </p>
+//               <p>
+//                 Rate: 1 {from} = {response.info.rate} {to}
+//               </p>
+//             </>
+//           ) : (
+//             "Converted Values Here"
+//           )}
+//         </div>
+//       </div>
+//       <div className="footer">Designed & Developed by @Raa</div>
+//     </>
+//   );
+// }
+
       
