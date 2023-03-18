@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import CurDropdown from "../Components/Dropdown";
 import "./style.css";
-import {Swap} from "../assets/index"
+import { Swap } from "../assets/index";
 
 export default function Index() {
   const [amount, setAmount] = useState("");
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
-  const [response, setResponse] = useState(null)
+  const [response, setResponse] = useState(null);
 
   const myHeaders = new Headers();
   myHeaders.append("apikey", "T6efhkEzieT0fGnoC3aHMczY82kHb0ms");
@@ -26,7 +26,7 @@ export default function Index() {
       );
       const result = await response.json();
       setResponse(result);
-      console.log(result);  
+      console.log(result);
     } catch (error) {
       console.log("error", error);
     }
@@ -38,11 +38,10 @@ export default function Index() {
   };
   return (
     <>
-    
       <div className="container">
-      <div className="header">
-      <h1>Currency Converter</h1>
-    </div>
+        <div className="header">
+          <h1>Currency Converter</h1>
+        </div>
         {/* <h1>Currency Converter</h1> */}
         <form className="" onSubmit={handleSubmit}>
           <div className="cur-form">
@@ -56,12 +55,15 @@ export default function Index() {
             </div>
             <div className="input-col">
               <p>From</p>
-              <CurDropdown value={from} onChange={(e) => setFrom(e.target.value)} />
+              <CurDropdown
+                value={from}
+                onChange={(e) => setFrom(e.target.value)}
+              />
             </div>
             <div className="input-col">
               <p></p>
               <div className="swap-btn" onClick={handleSwap}>
-              <Swap/>
+                <Swap />
               </div>
             </div>
             <div className="input-col">
@@ -70,26 +72,33 @@ export default function Index() {
             </div>
           </div>
           <div className="input-col">
-          <button className="sub-btn" type="submit">
-            Submit
-          </button>
+            <button className="sub-btn" type="submit">
+              Submit
+            </button>
           </div>
         </form>
         <div className="rslt-cntnr">
-        {response?(
-         <>
-
-        <p> {amount} {from} = {response.result} {to}</p>
-     <p>  Rate: 1 {from} = {response.info.rate} {to}</p>
-       </>
-         ):("Converted Values Here")
-        }
+          {response.success ? (
+            <>
+              <p>
+                {amount} {from} = {response.result} {to}
+              </p>
+              <p>
+                Rate: 1 {from} = {response.info.rate} {to}
+              </p>
+            </>
+          ) : response.message ? (
+            <p>You have exceeded your daily/monthly API rate limit.</p>
+          ) : (
+            <p>Converted Values will displayed here.</p>
+          )}
         </div>
-       
+        <div className="footer">
+       <p> Designed & Developed by @Raa</p></div>
       </div>
-      <div className="footer">
-        Designed & Developed by @Raa
-      </div>
+      {/* <div className="footer">
+        <br />
+       <p> Designed & Developed by @Raa</p></div> */}
     </>
   );
 }
@@ -100,9 +109,9 @@ export default function Index() {
 // import { Swap } from "../assets/index";
 
 // export default function Index() {
-//   const [amount, setAmount] = useState("");
-//   const [from, setFrom] = useState("");
-//   const [to, setTo] = useState("");
+//   const [amount, setAmount] = useState("1");
+//   const [from, setFrom] = useState("USD");
+//   const [to, setTo] = useState("INR");
 //   const [response, setResponse] = useState(null);
 
 //   const myHeaders = new Headers();
@@ -154,7 +163,10 @@ export default function Index() {
 //             </div>
 //             <div className="input-col">
 //               <p>From</p>
-//               <CurDropdown value={from} onChange={(e) => setFrom(e.target.value)} />
+//               <CurDropdown
+//                 value={from}
+//                 onChange={(e) => setFrom(e.target.value)}
+//               />
 //             </div>
 //             <div className="input-col">
 //               <p></p>
@@ -169,7 +181,7 @@ export default function Index() {
 //           </div>
 //         </form>
 //         <div className="rslt-cntnr">
-//           {response ? (
+//           {response.success ? (
 //             <>
 //               <p>
 //                 {amount} {from} = {response.result} {to}
@@ -179,7 +191,13 @@ export default function Index() {
 //               </p>
 //             </>
 //           ) : (
-//             "Converted Values Here"
+//             <>
+//               {response.message ? (
+//                 <p>{response.message}</p>
+//               ) : (
+//                 "Converted Values will displayed here"
+//               )}
+//             </>
 //           )}
 //         </div>
 //       </div>
@@ -187,5 +205,3 @@ export default function Index() {
 //     </>
 //   );
 // }
-
-      
