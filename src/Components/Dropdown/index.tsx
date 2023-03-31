@@ -9,7 +9,7 @@ export default function index({value, onChange}) {
       <option value="">Select Currency</option>
       {Object.entries(currencies).map(([code, name]) => (
         <option key={code} value={code} >
-          ({code}) {name}
+          {code} - {name}
         </option>
       ))}
     </select>
